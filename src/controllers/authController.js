@@ -1,22 +1,19 @@
 import { prismaClient } from "../index.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { signupSchema } from "../schema/users.js";
+import { loginSchema, signupSchema } from "../schema/users.js";
 
 const { hashSync, compareSync } = bcrypt;
 
 export const register = async (req, res) => {
   try {
-    
-    const body = signupSchema.safeParse(req.body)
+    const body = signupSchema.safeParse(req.body);
 
     if (!body.success) {
-       return res.status(400).json({ message: body.error.issues[0].message })
-      }
+      return res.status(400).json({ message: body.error.issues[0].message });
+    }
 
     const { name, email, password } = req.body;
-
-
 
     let user = await prismaClient.user.findFirst({
       where: { email: email },
@@ -34,32 +31,41 @@ export const register = async (req, res) => {
       },
     });
     res.json(user);
-
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const body = loginSchema.safeParse(req.body);
 
-  let user = await prismaClient.user.findFirst({
-    where: { email: email },
-  });
+    if (!body.success) {
+      return res.status(400).json({ message: body.error.issues[0].message });
+    }
+    
+    const { email, password } = req.body;
 
-  if (!user) {
-    throw Error("User does not exists");
+    let user = await prismaClient.user.findFirst({
+      where: { email: email },
+    });
+
+    if (!user) {
+      throw Error("User does not exists");
+    }
+
+    const isMatch = compareSync(password, user.password);
+
+    if (!isMatch) {
+      return res.json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+      expiresIn: "1h",
+    });
+
+    res.json({ user, token });
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
   }
-
-  const isMatch = compareSync(password, user.password);
-
-  if (!isMatch) {
-    return res.json({ message: "Invalid credentials" });
-  }
-
-  const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
-    expiresIn: "1h",
-  });
-
-  res.json({ user, token });
 };
