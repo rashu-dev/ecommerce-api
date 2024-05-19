@@ -69,3 +69,8 @@ export const login = async (req, res) => {
     return res.status(404).json({ message: error.message });
   }
 };
+
+
+export const currentUser = async (req, res) => {
+  return res.json(req.user)
+}
