@@ -43,3 +43,27 @@ export const updateProduct = async (req, res) => {
     return res.status(404).json({ message: error.message });
   }
 };
+
+export const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await prismaClient.product.delete({
+      where: { id: Number(id) },
+    });
+    res.json({ message: "delete successfully" });
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
+export const listProduct = async (req, res) => {
+  const count = await prismaClient.product.count();
+  const products = await prismaClient.product.findMany({
+    skip: Number(req.query.skip) || 0,
+    take: 5,
+  });
+  res.json({
+    count,
+    data: products,
+  });
+};
