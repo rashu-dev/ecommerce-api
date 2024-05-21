@@ -1,9 +1,10 @@
 import dotenv from "dotenv"
 dotenv.config()
 import express from "express"
-import authRoutes from "./routes/authRoutes.js"
 import { PrismaClient } from "@prisma/client"
+import authRoutes from "./routes/authRoutes.js"
 import productRoutes from "./routes/productRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 
 // initialize express
 const app = express()
@@ -28,5 +29,6 @@ app.use(express.json())
 // routes
 app.use("/api/auth", authRoutes)
 app.use("/api/product", productRoutes)
+app.use("/api/user", userRoutes)
 
 

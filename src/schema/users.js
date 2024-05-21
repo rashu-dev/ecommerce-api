@@ -11,3 +11,9 @@ export const loginSchema = z.object({
   email: z.string().email({message: "Invalid email address"}),
   password: z.string().min(6, "Password is too short")
 });
+
+export const addressSchema = z.object({
+  city: z.string(),
+  country: z.string(),
+  pincode: z.string().length(6)
+})
