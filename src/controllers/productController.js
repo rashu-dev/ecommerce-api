@@ -25,3 +25,21 @@ export const createProduct = async (req, res) => {
     return res.status(404).json({ message: error.message });
   }
 };
+
+export const updateProduct = async (req, res) => {
+  const product = req.body;
+
+  const { id } = req.params;
+
+  try {
+    const updateProduct = await prismaClient.product.update({
+      where: {
+        id: Number(id),
+      },
+      data: product,
+    });
+    return res.json(updateProduct);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
