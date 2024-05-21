@@ -67,3 +67,14 @@ export const listProduct = async (req, res) => {
     data: products,
   });
 };
+
+export const getProductById = async (req, res) => {
+  const { id } = req.params;
+  const product = await prismaClient.product.findFirst({
+    where: { id: Number(id) },
+  });
+  if (!product) {
+    return res.status(404).json({ message: "not found" });
+  }
+  res.json(product);
+};

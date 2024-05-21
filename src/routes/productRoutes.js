@@ -1,5 +1,5 @@
 import express from "express"
-import { createProduct, deleteProduct, listProduct, updateProduct } from "../controllers/productController.js"
+import { createProduct, deleteProduct, getProductById, listProduct, updateProduct } from "../controllers/productController.js"
 import { authMiddleware } from "../middlewares/auth.js"
 import { adminMiddleware } from "../middlewares/admin.js"
 
@@ -16,5 +16,8 @@ router.put("/update/:id", authMiddleware, adminMiddleware, updateProduct)
 
 // delete product
 router.delete("/delete/:id", authMiddleware, adminMiddleware, deleteProduct)
+
+// product by id
+router.get("/:id", getProductById)
 
 export default router
