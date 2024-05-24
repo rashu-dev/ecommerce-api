@@ -1,5 +1,5 @@
 import express from "express"
-import { createAddress, deleteAddress, listAddress } from "../controllers/userController.js"
+import { createAddress, deleteAddress, listAddress, updateUserAddress } from "../controllers/userController.js"
 import { authMiddleware } from "../middlewares/auth.js"
 
 const router = express.Router()
@@ -13,5 +13,8 @@ router.get("/all-addresses", authMiddleware, listAddress)
 
 // delete post
 router.delete("/delete-address/:id", authMiddleware, deleteAddress)
+
+// delete post
+router.put("/update-user-address", authMiddleware, updateUserAddress)
 
 export default router
