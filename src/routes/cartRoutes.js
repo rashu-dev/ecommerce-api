@@ -4,7 +4,7 @@ import {
   addCart,
   deleteCart,
   getCart,
-  updateCart,
+  updateCart
 } from "../controllers/cartItemController.js";
 
 const router = express.Router();
@@ -13,12 +13,12 @@ const router = express.Router();
 router.post("/add-cart", authMiddleware, addCart);
 
 // delete cart
-router.delete("/delete-cart:/id", authMiddleware, deleteCart);
+router.delete("/delete-cart/:id", authMiddleware, deleteCart)
 
-// update cart
-router.put("/update-cart:/id", authMiddleware, updateCart);
+// delete cart
+router.put("/update-cart/:id", authMiddleware, updateCart)
 
-// get cart
-router.get("/all-cart", authMiddleware, getCart);
+// all cart items
+router.get("/all-cart-items", authMiddleware, getCart)
 
 export default router;
