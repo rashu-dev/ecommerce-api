@@ -23,3 +23,14 @@ export const deleteAddress = async (req, res) => {
     return res.status(404).json({ message: error.message });
   }
 };
+
+export const listAddress = async (req, res) => {
+  try {
+    const addresses = await prismaClient.address.findMany({
+      where: {userId: req.user.id}
+    })
+    res.json(addresses)
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+}

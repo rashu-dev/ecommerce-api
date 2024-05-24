@@ -1,11 +1,15 @@
 import express from "express"
-import { createAddress, deleteAddress } from "../controllers/userController.js"
+import { createAddress, deleteAddress, listAddress } from "../controllers/userController.js"
 import { authMiddleware } from "../middlewares/auth.js"
 
 const router = express.Router()
 
+
 // create post
 router.post("/create-address", authMiddleware, createAddress)
+
+// get addresses
+router.get("/all-addresses", authMiddleware, listAddress)
 
 // delete post
 router.delete("/delete-address/:id", authMiddleware, deleteAddress)
