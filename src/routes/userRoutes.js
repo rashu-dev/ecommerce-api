@@ -8,6 +8,6 @@ const router = express.Router()
 router.post("/create-address", authMiddleware, createAddress)
 
 // delete post
-router.post("/create-address/:id", authMiddleware, deleteAddress)
+router.delete("/delete-address/:id", authMiddleware, deleteAddress)
 
 export default router
