@@ -11,3 +11,17 @@ export const createAddress = async (req, res) => {
   });
   res.status(201).json(address);
 };
+
+export const deleteAddress = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await prismaClient.product.delete({
+      where: { id: Number(id) },
+    });
+    return res.json({ message: "address delete successfully" });
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
+

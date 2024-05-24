@@ -5,12 +5,16 @@ export const authMiddleware = async (req, res, next) => {
   if (!req.headers.authorization) {
     return res.status(404).json({ message: "token not found" });
   }
+
   const token = req.headers.authorization;
-  const payload = jwt.verify(token, process.env.SECRET_KEY);
+
   if (!token) {
     return res.json("Unauthorized");
   }
+
   try {
+    const payload = jwt.verify(token, process.env.SECRET_KEY);
+
     const user = await prismaClient.user.findFirst({
       where: { id: payload.id },
     });
