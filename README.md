@@ -16,10 +16,7 @@ An Express.js-based API for an e-commerce application, utilizing Prisma for data
   - [Orders](#orders)
   - [Users](#users)
 - [Error Handling](#error-handling)
-- [Testing](#testing)
 - [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
