@@ -39,7 +39,7 @@ This e-commerce API provides a secure and scalable backend for an online store. 
 - **Prisma**: An ORM (Object-Relational Mapping) tool that simplifies database interactions.
 - **Zod**: A schema validation library used to validate request data and ensure data integrity.
 - **Node.js**: The JavaScript runtime environment that powers the API.
-- **PostgreSQL**: The relational database used to store e-commerce data.
+- **MySQL**: The relational database used to store e-commerce data.
 
 ## Getting Started
 
@@ -53,4 +53,5 @@ This e-commerce API provides a secure and scalable backend for an online store. 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/e-commerce-api.git
+   git clone https://github.com/sakayat/e-commerce-api.git
+   
