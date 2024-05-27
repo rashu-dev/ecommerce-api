@@ -46,7 +46,7 @@ This e-commerce API provides a secure and scalable backend for an online store. 
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (version 14 or higher)
-- [PostgreSQL](https://www.postgresql.org/) database
+- [MySQL](https://www.mysql.org/) database
 
 ### Installation
 
